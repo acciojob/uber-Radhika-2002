@@ -3,31 +3,34 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cab")
+@Table(name="cab")
 public class Cab {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer Id;
 
     private int perKmRate;
 
     private boolean available;
 
-    public Cab() {
-    }
+    @OneToOne
+    @JoinColumn
+    private Driver driver;
 
     public Cab(int perKmRate, boolean available) {
         this.perKmRate = perKmRate;
         this.available = available;
     }
 
-    public int getId() {
-        return id;
+    public Cab() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
     }
 
     public int getPerKmRate() {
@@ -45,9 +48,6 @@ public class Cab {
     public void setAvailable(boolean available) {
         this.available = available;
     }
-    @JoinColumn
-    @OneToOne
-    Driver driver;
 
     public Driver getDriver() {
         return driver;
